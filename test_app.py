@@ -15,5 +15,5 @@ print(classifier("We are going to the zoo today.",
         candidate_labels=["animals", "politics", "kids"]))
 
 # generates a text to a given text
-generator = pipeline("text-generation")
+generator = pipeline("text-generation", model="gptj")
 print(generator("It was a beautiful day and"))
