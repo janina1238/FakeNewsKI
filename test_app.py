@@ -9,5 +9,5 @@ print(classifier("It is a bad and good day!"))
 # comment out: #from keras.saving.hdf5_format import save_attributes_to_hdf5_group
 
 classifier = pipeline("zero-shot-classification")
-print(classifier("It is a bad and good day!",
-        candidate_labels="
+print(classifier("We are going to the zoo today.",
+        candidate_labels=["animals", "politics", "kids"]))
