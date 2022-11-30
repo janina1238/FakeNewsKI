@@ -1,4 +1,5 @@
-from transformers import pipeline
+from transformers import pipeline, GPTJForCausalLM, AutoTokenizer
+import torch
 
 # analyses if a text has a good or bad mood
 classifier = pipeline("sentiment-analysis")
@@ -14,6 +15,13 @@ classifier = pipeline("zero-shot-classification")
 print(classifier("We are going to the zoo today.",
         candidate_labels=["animals", "politics", "kids"]))
 
+model = GPTJForCausalLM.from_pretrained(
+
+    "EleutherAI/gpt-j-6B", revision="float16", torch_dtype=torch.float16, low_cpu_mem_usage=True
+)
+
+tokenizer = AutoTokenizer.from_pretrained("EleutherAI/gpt-j-6B")
+
 # generates a text to a given text
-generator = pipeline("text-generation", model="gptj")
+generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
 print(generator("It was a beautiful day and"))
